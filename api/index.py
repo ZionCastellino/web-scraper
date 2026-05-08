@@ -27,7 +27,7 @@ def fetch_and_clean_html(url: str) -> str:
     resp = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
 
-    soup = BeautifulSoup(resp.text, "lxml")
+    soup = BeautifulSoup(resp.text, "html.parser")
     for tag in soup(["script", "style", "noscript", "meta", "link", "header", "footer", "nav", "svg", "button", "iframe"]):
         tag.decompose()
     return soup.get_text(separator="\n", strip=True)
