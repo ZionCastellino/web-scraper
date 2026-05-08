@@ -115,6 +115,7 @@ def extract_data_with_ai(text: str, user_request: str) -> dict:
 
 
 @app.route("/api/scrape", methods=["POST"])
+@app.route("/scrape", methods=["POST"])
 def api_scrape():
     req_data = request.json
     url = req_data.get("url")
@@ -135,6 +136,7 @@ def api_scrape():
     return jsonify({"success": True, "data": result["data"]})
 
 @app.route("/api/download", methods=["POST"])
+@app.route("/download", methods=["POST"])
 def api_download():
     req_data = request.json
     data = req_data.get("data", [])
