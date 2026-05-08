@@ -11,7 +11,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 load_dotenv()
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+app = Flask(__name__)
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
@@ -112,9 +112,7 @@ def extract_data_with_ai(text: str, user_request: str) -> dict:
                 
         return {"success": False, "error": "AI response was too large and got cut off. Try asking for fewer items (e.g. 'Top 10...'). " + str(e), "raw": raw[:500]}
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+
 
 @app.route("/api/scrape", methods=["POST"])
 def api_scrape():
